@@ -18,6 +18,10 @@ PACKAGES=""
 if [[ ${PLATFORM_TYPE} == "arm" || ${PLATFORM_TYPE} == "aarch64" ]]; then
     PLATFORMS="linux/arm64"
     PACKAGES="docker"
+else
+    # See https://docs.docker.com/build/building/multi-platform/#install-qemu-manually
+    # We use QEMU for non arm platforms using the golang-crossbuild
+    docker run --privileged --rm tonistiigi/binfmt --install all
 fi
 
 add_bin_path
