@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+if [[ "$BUILDKITE_STEP_KEY" == "terrazzo-initial-pipeline-upload" ]]; then
+  echo "Skipped post-checkout when running the Upload pipeline"
+  return 0
+fi
+
 checkout_merge() {
     local target_branch=$1
     local pr_commit=$2
